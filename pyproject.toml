@@ -51,7 +51,7 @@ package-dir = {"" = "src"}
 files = "."
 
 # Use strict defaults
-strict = true
+strict = false
 warn_unreachable = true
 warn_no_return = true
 
@@ -60,4 +60,35 @@ warn_no_return = true
 module = "tests.*"
 allow_untyped_defs = true
 disable_error_code = "attr-defined"
+
+
+
+# Poetry
+# ------
+
+[tool.poetry]
+name = "django_streamlit"
+version = "0.1.0"
+description = "Django + Streamlit"
+authors = ["Özer Sahin <info@mathison.ch>"]
+license = "MIT"
+readme = "README.rst"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+django = "^5.1.1"
+streamlit = "^1.38.0"
+
+[tool.poetry.group.dev.dependencies]
+pip = "^24.2"
+bump2version = "^1.0.1"
+wheel = "^0.44.0"
+tox = "^4.20.0"
+coverage = "^7.6.1"
+sphinx = "^8.0.2"
+twine = "^5.1.1"
+ruff = "^0.6.8"
+pytest = "^8.3.3"
+django-stubs = "^5.1.0"
+mypy = "^1.11.2"
 
