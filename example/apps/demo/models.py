@@ -10,6 +10,10 @@ class Country(models.Model):
     Country data
     """
 
+    class Meta:
+        verbose_name = "Country"
+        verbose_name_plural = "Countries"
+
     objects = DataFrameManager()
 
     country = models.CharField(
