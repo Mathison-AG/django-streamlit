@@ -78,6 +78,7 @@ readme = "README.rst"
 python = "^3.12"
 django = "^5.1.1"
 streamlit = "^1.38.0"
+django-pandas = "^0.6.7"
 
 [tool.poetry.group.dev.dependencies]
 pip = "^24.2"

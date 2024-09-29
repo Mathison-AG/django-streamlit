@@ -1,30 +1,20 @@
+from functools import cached_property
 from django.db import models
+import streamlit as st
+
+from django_pandas.managers import DataFrameManager
 
 
 class Country(models.Model):
     """
-    Country
-    Region
-    Population
-    Area (sq. mi.)
-    Pop. Density (per sq. mi.)
-    Coastline (coast/area ratio)
-    Net migration
-    Infant mortality (per 1000 births),GDP ($ per capita)
-    Literacy (%)
-    Phones (per 1000)
-    Arable (%)
-    Crops (%)
-    Other (%)
-    Climate
-    Birthrate
-    Deathrate
-    Agriculture
-    Industry
-    Service
+    Country data
     """
 
-    country = models.CharField("Country", max_length=255, blank=True)
+    objects = DataFrameManager()
+
+    country = models.CharField(
+        "Country", max_length=255, blank=True, help_text="Name of the country"
+    )
     region = models.CharField("Region", max_length=255, blank=True)
     population = models.IntegerField("Population", null=True)
     area = models.FloatField("Area (sq. mi.)", null=True)
@@ -46,3 +36,28 @@ class Country(models.Model):
     agriculture = models.FloatField("Agriculture", null=True)
     industry = models.FloatField("Industry", null=True)
     service = models.FloatField("Service", null=True)
+
+    def __str__(self):
+        return str(self.country)
+
+    @cached_property
+    def column_config(self):
+        columns = {}
+
+        for field in self._meta.fields:
+            if isinstance(field, models.CharField):
+                columns[field.name] = st.column_config.TextColumn(
+                    label=field.verbose_name, help=field.help_text
+                )
+
+            if isinstance(field, models.IntegerField):
+                columns[field.name] = st.column_config.NumberColumn(
+                    label=field.verbose_name, help=field.help_text
+                )
+
+            if isinstance(field, models.FloatField):
+                columns[field.name] = st.column_config.NumberColumn(
+                    label=field.verbose_name, help=field.help_text
+                )
+
+        return columns
