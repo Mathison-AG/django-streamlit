@@ -26,7 +26,9 @@ Django + Streamlit
 Features
 --------
 
-* TODO
+* Turn any Django QuerySet into a Streamlit dataframe
+* Turn Django models into Streamlit forms (TODO)
+* Turn Django models into Streamlit tables with  sorting, filtering, and pagination (TODO)
 
 Credits
 -------
